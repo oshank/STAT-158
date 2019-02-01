@@ -1,4 +1,5 @@
 # Oliver Shanklin
+# 1 February 2019
 # STAT 158 Homework 1
 
 #### Problem 1
