@@ -1,5 +1,5 @@
 ---
-title: "ShanklinH2"
+title: "ShanklinHW2"
 output: pdf_document
 ---
 
@@ -58,14 +58,14 @@ pairs(Just_Numbers)
 
 ```{r}
 
-Just_Numbers[with(Just_Numbers, order(-Just_Numbers$Sentences)),]
+Just_Numbers <- Just_Numbers[with(Just_Numbers, order(-Just_Numbers$Sentences)),]
 
 ```
 
 ### 8)
 ```{r}
 
-
+# Not sure how cbind() works
 
 ```
 
