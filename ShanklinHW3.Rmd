@@ -1,0 +1,91 @@
+---
+title: "ShanklinHW3"
+author: "Oliver Shanklin"
+date: "February 26, 2019"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+## 1)
+
+```{r}
+
+vec_01 <- rnorm(10, mean = 0, sd = 1)
+vec_1001 <- rnorm(10, mean = 100, sd = 1)
+vec_10010 <- rnorm(10, mean = 100, sd = 10)
+mean(c(vec_01, vec_1001, vec_10010))
+sd(c(vec_01, vec_1001, vec_10010))
+
+
+```
+
+The mean and sd are not the exact same because we are sampling from those disatributions, but we are close since we are taking a sample.
+
+
+## 2) 
+
+```{r}
+
+sample(c("heads", "tails"), 20, p = c(.5,.5), replace =T)
+
+
+```
+
+## 3) 
+
+```{r}
+
+set.seed(158)
+sample(c("heads", "tails"), 20, p = c(.5,.5), replace =T)
+
+
+```
+
+set.seed(158) allows us to repeat the random sample with the exact same output.
+
+## 4)
+
+
+```{r}
+
+x <- runif(20,-10,10)
+
+y <- 75 + 2*x + 0.5*x^2 + 0.1*x^3
+
+plot(x,y)
+
+noise <- rnorm(20,0,5)
+
+y_noise <- y + noise
+
+plot(x,y_noise)
+
+```
+
+#### d) The plot is slightly different, where the scatter plot is not a perfect cubic funtion. There is a slight "noise" in the graph.
+
+```{r}
+
+noise_2 <- rnorm(20, 0, 50)
+
+y_noise_2 <- y + noise_2
+
+plot(x,y_noise_2)
+
+
+```
+
+
+#### e) There is a larger change in the graph because we are sampling from a normal with a larger sd, which means more variation in our noise plot.
+
+```{r}
+cbind(y, y_noise, y_noise_2)
+```
+
+#### f) There seems to be a much larger change in numbers because of the larger variation in the noise. So with more variation, there is a chance to have the noise farther away from "true"" y values.
+
+
