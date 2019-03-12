@@ -28,19 +28,10 @@ R reported the data as a "data.frame"
 How	many	females	are	in	this	data	set?		How	many	males?
 
 ```{r}
-females <- 0
-males <- 0
-for(i in seq(1:length(stat_class_data$Sex))){
-  if(stat_class_data$Sex[i] == "F"){
-    females <- females + 1
-  }
-  else if(stat_class_data$Sex[i] == "M"){
-    males <- males + 1
-  }
-}
 
-males
-females
+sum(stat_class_data$Sex == "F")
+
+sum(stat_class_data$Sex == "M")
 
 
 ```
@@ -93,7 +84,7 @@ plot(stat_class_data$Number)
 
 ```
 
-This plot is showing the number on the y-axis and the position in the vector on the x-axis. So, since there are 2 very large numbers in the data set, it is hard to see all the smaller ones on a plot.
+This plot is showing the number on the y-axis and the position in the vector on the x-axis. So, since there are 2 very large numbers in the data set, it is hard to see all the smaller values on a plot.
 
 
 #### f)
@@ -131,13 +122,72 @@ So, with the outliers, the mean is 1263612, and the mean without the outliers is
 ## 2)
 
 
+```{r}
+# One way
+x_vec <- seq(-3,3,0.1)
+y_vec <- (1/sqrt(2*pi))*exp(-(x_vec/2)^2)
+
+plot(x_vec, y_vec)
+
+# Another way using function
+y <- function(x){
+  (1/sqrt(2*pi))*exp(-(x/2)^2)
+}
+
+plot(seq(-3,3, by = .1), y(seq(-3,3,by=.1)))
 
 
+```
+
+## 3)
+
+#### a)
+
+```{r}
+
+random_sample <- sample(seq(1,100), 1000, replace = T)
+
+hist(random_sample)
 
 
+```
 
 
+#### b)
 
+```{r}
+
+random_norm <- rnorm(1000, mean = 10, sd = 2)
+
+hist(random_norm)
+
+```
+
+#### C)
+
+```{r}
+
+random_s_n <- c(random_norm, random_sample)
+
+hist(random_s_n)
+
+```
+
+#### d)
+
+```{r}
+
+random_s_plus_n <- random_norm + random_sample
+
+hist(random_s_plus_n)
+
+
+```
+
+
+#### e)
+
+These histograms look very different. In part c, since we are just making a new vector with both vectors concatinated, it has a skew right, because there are a lot of data from the normal vector around the mean, 10. In part d, the vectors are being added together, so the maximum changes and we see a relitively uniform histogram, not including the end classes.
 
 
 
