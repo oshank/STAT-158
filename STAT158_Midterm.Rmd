@@ -9,3 +9,135 @@ output: pdf_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+## 1)
+
+#### a)
+
+Read the data into R. State the names of	the	columns	in	this	dataset,	and	report	what	"class"	R	assigned	to	each	one.
+```{r}
+stat_class_data <- read.csv("~/Git/STAT-158/Stat_class_data.csv", header=T)
+
+class(stat_class_data)
+
+```
+
+R reported the data as a "data.frame"
+
+#### b)
+
+How	many	females	are	in	this	data	set?		How	many	males?
+
+```{r}
+females <- 0
+males <- 0
+for(i in seq(1:length(stat_class_data$Sex))){
+  if(stat_class_data$Sex[i] == "F"){
+    females <- females + 1
+  }
+  else if(stat_class_data$Sex[i] == "M"){
+    males <- males + 1
+  }
+}
+
+males
+females
+
+
+```
+There are 73 females and 60 males in this data set.
+
+
+#### c)
+
+Get	R	to	tell	you	all	the	values	that	favorite	color	takes	on.		What	are	the	three	most	popular	
+favorite	colors?
+
+
+```{r}
+levels(stat_class_data$Color)
+colors_data <- levels(stat_class_data$Color)
+
+n <- length(stat_class_data$Color)
+color_proportion <- numeric()
+
+
+for(i in seq(1:length(colors_data))){
+  color_proportion[i] <- sum(stat_class_data$Color == colors_data[i])
+}
+color_proportion <- color_proportion / n
+color_proportion
+  
+```
+So the 3 most popular colors are Blue, Green, and Purple.
+
+#### d)
+
+Have	R	give	you	summary	statistics	for	height.			What	is	the	value	for	median	height?
+
+
+```{r}
+
+summary(stat_class_data$Height)
+
+```
+
+
+The median height is 68. And I will assume that is inches.
+
+#### e)
+
+Make	a	plot	of	"number".		Describe	what	this	plot	is	showing	you.
+
+```{r}
+plot(stat_class_data$Number)
+
+```
+
+This plot is showing the number on the y-axis and the position in the vector on the x-axis. So, since there are 2 very large numbers in the data set, it is hard to see all the smaller ones on a plot.
+
+
+#### f)
+
+Get	R	to	calculate	how	many	values	for	"number"	are	greater	than	5000.		What	proportion	
+of	students	is	this?
+
+```{r}
+sum(stat_class_data$Number > 5000)
+
+sum(stat_class_data$Number > 5000) / length(stat_class_data$Number)
+
+
+```
+
+There are 7 numbers greater than 5000, so the proportion is 0.052631.
+
+
+#### g)
+
+Rows	77	and	127	contain	extreme	outliers	for	the	"number"	variable.		Use	R	to	create	a	new	variable	set	that	excludes	these	rows	but	contains	the	values	of	"number"	for	all	the	other	rows.		Report	the	mean	of	number	with	and	without	these	two	extreme	outliers	included.	
+
+```{r}
+
+numbers_removed <- stat_class_data$Number[-c(77,127)]
+
+mean(stat_class_data$Number)
+mean(numbers_removed)
+
+```
+
+So, with the outliers, the mean is 1263612, and the mean without the outliers is 841.4564.
+
+
+## 2)
+
+
+
+
+
+
+
+
+
+
+
+
