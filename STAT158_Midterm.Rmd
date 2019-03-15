@@ -15,13 +15,23 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Read the data into R. State the names of	the	columns	in	this	dataset,	and	report	what	"class"	R	assigned	to	each	one.
 ```{r}
-stat_class_data <- read.csv("~/Git/STAT-158/Stat_class_data.csv", header=T)
+stat_class_data <- read.csv("Stat_class_data.csv", header=TRUE)
 
-class(stat_class_data)
+colnames(stat_class_data)
 
 ```
 
-R reported the data as a "data.frame"
+The classes for each column are:
+```{r}
+class(stat_class_data$Sex)
+class(stat_class_data$Height)
+class(stat_class_data$Color)
+class(stat_class_data$Number)
+
+
+```
+
+
 
 #### b)
 
