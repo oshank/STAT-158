@@ -1,0 +1,94 @@
+---
+title: "STAT 158 HW 4"
+author: "Oliver Shanklin"
+output: pdf_document
+---
+
+```{r}
+library(knitr)
+opts_chunk$set(tidy.opts=list(width.cutoff=60),tidy=TRUE)
+```
+
+## 1)
+
+```{r}
+attach(iris)
+
+petalwidth <- iris$Petal.Width[Species == "setosa"]
+petallength <- iris$Petal.Length[Species == "setosa"]
+
+plot(iris$Petal.Width[Species == "setosa"],iris$Petal.Length[Species == "setosa"], type = "p",xlab="Petal Width", ylab = "Petal Length", pch=4,col = "blue", ylim = c(min(iris$Petal.Length),max(iris$Petal.Length)), xlim = c(min(iris$Petal.Width),max(iris$Petal.Width)))
+points(iris$Petal.Width[Species == "versicolor"],iris$Petal.Length[Species == "versicolor"], pch=3, col = "green")
+points(iris$Petal.Width[Species == "virginica"],iris$Petal.Length[Species == "virginica"], pch=2, col="red")
+title(main = "Petal Length vs Width")
+
+
+```
+
+
+## 2)
+
+
+```{r}
+
+norm1 <- rnorm(187, 0, 3)
+norm2 <- rnorm(213, 3, 1)
+norm3 <- rnorm(150, 2, 5)
+
+
+boxplot(norm1, norm2, norm3, col = c("grey10","grey40","grey80"), names = c("mean=0, sd=3","mean=3, sd=1","mean=2, sd=5"), frame.plot = F, cex.axis = .75, cex.lab =1)
+
+
+
+```
+
+
+## 3)
+
+```{r}
+
+sampleSDa <- numeric()
+
+for (i in 1:10000){
+  
+  sampleSDa[i] <- sd(runif(n=30, min = 100, max = 300))
+
+}
+
+sampleSDb <- numeric()
+
+for (i in 1:10000){
+  
+  sampleSDb[i] <- sd(runif(n=50, min = 100, max = 300))
+
+}
+
+sampleSDc <- numeric()
+
+for (i in 1:10000){
+  
+  sampleSDc[i] <- sd(runif(n=30, min = 100, max = 500))
+
+}
+
+
+hist(sampleSDa, xlim = c(0,140), ylim = c(0,2000))
+
+hist(sampleSDb, xlim = c(0,140), ylim = c(0,2000))
+
+hist(sampleSDc, xlim = c(0,140), ylim = c(0,2000))
+
+```
+
+
+## 4)
+
+```{r}
+
+
+
+
+
+```
+
+
