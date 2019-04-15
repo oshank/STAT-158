@@ -10,16 +10,107 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## 1)
-
+#### a)
 
 ```{r}
 
-jantemp <- read.csv("january_temp.csv", header = T)
+jantemp <- read.csv("january_temp.csv", header = TRUE)
 attach(jantemp)
+
+plot(jantemp$Lat, jantemp$Long)
+
+```
+
+
+
+I was not sure what I was expecting for the plot.
+
+### b)
+
+```{r}
+
+jantempLat <- lm(jantemp$JanTemp~jantemp$Lat)
+
+plot(jantemp$JanTemp~jantemp$Lat)
+abline(jantempLat$coefficients)
+
+anova(jantempLat)
+summary(jantempLat)
+
+```
+
+JanTemp = 108.73 - 2.11(Latitude)
+
+$R^2$ is 0.7192
+
+
+#### c)
+```{r}
+
+
+jantempLong <- lm(jantemp$JanTemp~jantemp$Long)
+
+plot(jantemp$JanTemp~jantemp$Long)
+abline(jantempLong$coefficients)
+
+anova(jantempLong)
+summary(jantempLong)
 
 
 
 ```
+
+JanTemp = 24.571 + 0.0214(Longitude)
+
+$R^2$ is 0.0005732
+
+#### d)
+
+It seems that the Latitude does a better job at predicting the tempurature since the $R^2$ value is closer to 1.
+
+#### e)
+
+```{r}
+
+jantempLatLong <- lm(jantemp$JanTemp~jantemp$Lat+jantemp$Long)
+
+anova(jantempLatLong)
+summary(jantempLatLong)
+
+```
+
+$JanTemp = 98.64 - 2.16355(Lat) + 0.13396(Long)$
+
+$R^2 = 0.7411$
+
+The coefficient that changed the most was the Longitude. Up from 0.02.
+
+
+#### f)
+
+```{r}
+
+jantempLatLongInt <- lm(jantemp$JanTemp~jantemp$Lat+jantemp$Long + jantemp$Lat*jantemp$Long)
+
+anova(jantempLatLongInt)
+summary(jantempLatLongInt)
+
+```
+
+
+$JanTemp = 259.48952 - 6.07(Lat) - 1.61(Long) + .042(Lat)(Long)$
+
+$R^2 = 0.7939$
+
+The $R^2$ Value did not change by much.
+
+#### g)
+
+Since I ran the anova command in each part here is the list of MSE.
+
+51.2 for b), 182.228 for c), 48.1 for e), and 39.0 for f)
+
+The closer to 0 that the r-squared is, the higher MSE is produced, and the farther away from 0, the MSE is lower.
 
 ## 2)
 
@@ -30,10 +121,10 @@ t_stat <- numeric()
 
 for(i in 1:10000){
 
-  sample1 <- rnorm(1000,0,1)
-  sample2 <- rnorm(1000,0,1)
+  sample1 <- rnorm(10000,0,1)
+  sample2 <- rnorm(10000,0,1)
 
-  t_stat[i] <- t.test(sample1, sample2, var.equal = T)$statistic
+  t_stat[i] <- t.test(sample1, sample2, var.equal = F)$statistic
 }
 #t_stat
 
@@ -42,4 +133,53 @@ hist(t_stat, freq = F)
 
 
 ```
+
+## 3)
+
+#### a)
+
+```{r Problem3a}
+
+t_stat2 <- numeric()
+
+for(i in 1:10000){
+
+  sample1 <- rnorm(100,0,1)
+  sample2 <- rnorm(10,0,5)
+
+  t_stat2[i] <- t.test(sample1, sample2, var.equal = F)$statistic
+}
+#t_stat
+
+
+hist(t_stat2, freq = F)
+
+
+```
+
+This simulation produces a histogram very tall area around the mean, unlike 2) where it looked normal.
+
+
+#### b)
+
+```{r Problem3b}
+
+t_stat3 <- numeric()
+
+for(i in 1:10000){
+
+  sample1 <- rnorm(100,0,1)
+  sample2 <- rnorm(10,0,5)
+
+  t_stat3[i] <- t.test(sample1, sample2, var.equal = TRUE)$statistic
+}
+#t_stat
+
+
+hist(t_stat3, freq = F)
+
+
+```
+
+This histogram seems to be much wider with heavier tails.
 
