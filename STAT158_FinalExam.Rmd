@@ -1,7 +1,7 @@
 ---
 title: "STAT 158 Final Exam"
 author: "Oliver Shanklin"
-date: "May 9, 2019"
+date: "May 10, 2019"
 output: pdf_document
 ---
 
@@ -72,6 +72,8 @@ plot(Age, HR, main = "Age vs Heart Rate", ylab = "Heart Rate", xlab = "Age", cex
 ```{r 1c}
 
 
+
+
 ```
 
 
@@ -117,4 +119,89 @@ t.test(gamma_1,gamma_2)
 
 
 
+## 3)
 
+```{r Problem 3}
+
+Ferret_Vaccine <- read.csv("C:/Users/st430/Downloads/Ferret_Vaccine.csv")
+attach(Ferret_Vaccine)
+
+```
+
+
+
+#### a)
+
+```{r 3a}
+
+mean(Ferret_Vaccine$Temperature)
+
+mean(Ferret_Vaccine$Weight)
+
+
+```
+
+#### b)
+
+```{r 3b}
+
+temp574 <- Temperature[Ferret.ID == "574"]
+day574 <- Day[Ferret.ID == "574"]
+temp546 <- Temperature[Ferret.ID == "546"]
+day546 <- Day[Ferret.ID == "546"]
+temp548 <- Temperature[Ferret.ID == "548"]
+day548 <- Day[Ferret.ID == "548"]
+
+plot(day574, temp574, type = "l", lty = 1,
+     xlim = c(min(day574,day546,day548), max(day574, day546, day548)),
+     ylim = c(min(temp574,temp546,temp548), max(temp574, temp546, temp548)),
+     ylab = "Temperature", xlab = "Day")
+lines(day546, temp546, type = "l", lty = 5)
+lines(day548, temp548, type = "l", lty = 3)
+
+
+```
+
+#### c)
+
+```{r 3c}
+
+temp_vac_none <- Temperature[Vaccine =="None"]
+temp_vac <- Temperature[Vaccine =="Vaccine"]
+
+day_vac_none <- Day[Vaccine == "None"][1:16]
+day_vac <- Day[Vaccine == "Vaccine"][1:16]
+
+temp_vac_none_matrix <- matrix(temp_vac_none, ncol=16, byrow = T)
+temp_vac_matrix <- matrix(temp_vac, ncol=16, byrow = T)
+
+avg_temp_vac_none <- apply(temp_vac_none_matrix, 2, FUN = mean)
+avg_temp_vac <- apply(temp_vac_matrix, 2, FUN = mean)
+
+
+plot(day_vac_none, avg_temp_vac_none, type = "l", lty = 1,
+     xlab = "Days", ylab = "Average Temperature")
+lines(day_vac, avg_temp_vac, type = "l", lty = 5)
+
+```
+
+
+#### d)
+
+```{r 3d}
+
+max_temp_vac_none <- apply(temp_vac_none_matrix, 2, FUN = max)
+max_temp_vac <- apply(temp_vac_matrix, 2, FUN = max)
+
+
+
+test_vac_none <- t.test(max_temp_vac, max_temp_vac_none)
+
+
+
+test_vac_none$statistic
+test_vac_none$p.value
+
+
+
+```
